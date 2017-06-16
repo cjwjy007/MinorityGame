@@ -14,13 +14,13 @@ class Strategy:
             random_strategy = random.sample(range(2 ** (2 ** self.memory_num)), self.strategy_num)
             for i in range(len(random_strategy)):
                 self.strategy_score_dic[random_strategy[i]] = 0
-            self.update_strategy()
+            self._update_strategy()
         except ValueError as e:
             print(e)
             exit()
 
     # update current strategy
-    def update_strategy(self):
+    def _update_strategy(self):
         max_score = max(self.strategy_score_dic.values())
         max_score_list = [v for i, v in enumerate(self.strategy_score_dic) if self.strategy_score_dic[v] == max_score]
         max_score_index = choice(max_score_list)
@@ -30,7 +30,7 @@ class Strategy:
     def update_score(self, is_win=None):
         if is_win == 1:
             self.strategy_score_dic[self.current_strategy] += 1
-        self.update_strategy()
+        self._update_strategy()
 
     # get result from current strategy
     def get_result(self, binary_input: list = None):

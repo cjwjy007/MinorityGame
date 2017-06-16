@@ -14,6 +14,7 @@ class Player:
     def _init_random_memory(self):
         self.memory = [random.randint(0, 1) for i in range(self.memory_num)]
 
+    # update memory and strategy score
     def update_memory(self, result=None):
         self.memory.pop(0)
         if result == 1:
@@ -22,5 +23,6 @@ class Player:
             self.memory.append(0)
         self.strategy.update_score(is_win=result)
 
+    # get strategy result by memory
     def get_strategy_result(self):
         return self.strategy.get_result(self.memory)

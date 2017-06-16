@@ -16,15 +16,17 @@ class Game:
         for i in range(self.player_num):
             self.player_list.append(Player(memory_num=self.memory_num, strategy_num=self.strategy_num))
 
+    # start game
     def start_game(self):
         for i in range(self.iter_num):
             print("this is %dth iteration" % i)
-            self.print_current_info()
-            self.calc_sum()
-            self.notify_players()
+            self._print_current_info()
+            self._calc_sum()
+            self._notify_players()
             print("")
 
-    def calc_sum(self):
+    # calculate sum of player decision
+    def _calc_sum(self):
         diff_sum = 0
         for idx, val in enumerate(self.player_list):
             player_strategy = val.get_strategy_result()
@@ -34,10 +36,12 @@ class Game:
         for i in range(len(self.last_result_dic)):
             self.last_result_dic[i] = -1 if self.last_result_dic[i] * diff_sum > 0 else 1
 
-    def notify_players(self):
+    # tell player the result
+    def _notify_players(self):
         for idx, val in enumerate(self.player_list):
             val.update_memory(self.last_result_dic[idx])
 
+    # detect input error
     def _detect_input_error(self):
         # player_num must be odd
         try:
@@ -47,7 +51,8 @@ class Game:
             print(e)
             exit()
 
-    def print_current_info(self):
+    # print information
+    def _print_current_info(self):
         for idx, val in enumerate(self.player_list):
             print("player:%d" % idx, end=' ')
             print("memory:%r" % val.memory, end=' ')
