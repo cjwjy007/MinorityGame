@@ -15,14 +15,16 @@ class Player:
         self.memory = [random.randint(0, 1) for i in range(self.memory_num)]
 
     # update memory and strategy score
-    def update_memory(self, result=None):
-        self.memory.pop(0)
-        if result == 1:
-            self.memory.append(1)
-        else:
+    def update_memory(self, cal_sum_flag=None):
+        temp_result = self.get_current_result()
+        self.strategy.update_score(memory=self.memory, cal_sum_flag=cal_sum_flag)
+        if cal_sum_flag * temp_result == 1:
+            self.memory.pop(0)
             self.memory.append(0)
-        self.strategy.update_score(is_win=result)
+        else:
+            self.memory.pop(0)
+            self.memory.append(1)
 
     # get strategy result by memory
-    def get_strategy_result(self):
-        return self.strategy.get_result(self.memory)
+    def get_current_result(self):
+        return self.strategy.get_current_strategy_result(binary_input=self.memory)

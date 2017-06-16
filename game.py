@@ -21,25 +21,26 @@ class Game:
         for i in range(self.iter_num):
             print("this is %dth iteration" % i)
             self._print_current_info()
-            self._calc_sum()
-            self._notify_players()
+            self._notify_players(self._calc_sum())
             print("")
 
     # calculate sum of player decision
     def _calc_sum(self):
         diff_sum = 0
         for idx, val in enumerate(self.player_list):
-            player_strategy = val.get_strategy_result()
+            player_strategy = val.get_current_result()
             self.last_result_dic[idx] = player_strategy
-            diff_sum += val.get_strategy_result()
-
-        for i in range(len(self.last_result_dic)):
-            self.last_result_dic[i] = -1 if self.last_result_dic[i] * diff_sum > 0 else 1
+            diff_sum += val.get_current_result()
+        diff_sum_flag = 1 if diff_sum > 0 else -1
+        return diff_sum_flag
+        #
+        # for i in range(len(self.last_result_dic)):
+        #     self.last_result_dic[i] = -1 if self.last_result_dic[i] * diff_sum > 0 else 1
 
     # tell player the result
-    def _notify_players(self):
+    def _notify_players(self, cal_sum_flag=None):
         for idx, val in enumerate(self.player_list):
-            val.update_memory(self.last_result_dic[idx])
+            val.update_memory(cal_sum_flag)
 
     # detect input error
     def _detect_input_error(self):
@@ -53,11 +54,12 @@ class Game:
 
     # print information
     def _print_current_info(self):
-        for idx, val in enumerate(self.player_list):
-            print("player:%d" % idx, end=' ')
-            print("memory:%r" % val.memory, end=' ')
-            print("current strategy:%d" % val.strategy.current_strategy)
+        for player_id, player in enumerate(self.player_list):
+            print("player:%d" % player_id, end=' ')
+            print("memory:%r" % player.memory, end=' ')
+            print("current strategy:%d" % player.strategy.current_strategy, end=' ')
+            print("player choice:%d" % player.get_current_result())
             print("strategy table info(s_id:score):", end='')
-            for i in val.strategy.strategy_score_dic:
-                print("%d:%d" % (i, val.strategy.strategy_score_dic[i]), end=' ')
+            for i in player.strategy.strategy_score_dic:
+                print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
             print("")
