@@ -1,4 +1,3 @@
-
 from player_factory import PlayerFactory
 
 
@@ -98,7 +97,7 @@ class Game:
                 print("strategy table info(s_id:score):", end='')
                 for i in player.strategy.strategy_score_dic:
                     print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
-                print("")
+            print("")
 
     # get head count
     def get_head_count(self):
