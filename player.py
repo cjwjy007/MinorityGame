@@ -7,6 +7,7 @@ class Player:
     def __init__(self, memory_num=None, strategy_num=None):
         self.memory_num = memory_num
         self.memory = []
+        self.capital = 0
         self._init_random_memory()
 
     def _init_random_memory(self):
@@ -21,6 +22,7 @@ class Player:
         else:
             self.memory.pop(0)
             self.memory.append(1)
+            self.capital = self.capital + 1
 
     # get strategy result by memory
     def get_current_result(self):

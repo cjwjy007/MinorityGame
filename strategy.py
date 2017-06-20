@@ -1,7 +1,6 @@
 from random import choice
 import random
 
-
 class Strategy:
     def __init__(self, memory_num=None, strategy_num=None):
         self.strategy_num = strategy_num
@@ -45,6 +44,7 @@ class Strategy:
         input_index = self._bin_to_dec(binary_input)
         strategy_array = self._dec_to_bin(strategy_input)
         return -1 if strategy_array[input_index] == 0 else 1
+
 
     # get result from current strategy
     def get_current_strategy_result(self, binary_input: list = None):
