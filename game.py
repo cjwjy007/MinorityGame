@@ -1,4 +1,5 @@
 from player import Player
+from chart import Chart
 
 
 class Game:
@@ -9,8 +10,14 @@ class Game:
         self.player_num = player_num
         self._detect_input_error()
         self.player_list = []
+        self.chart_1_x = []
+        self.chart_1_y = []
+        self.chart_2_x = []
+        self.chart_2_y = []
+        self._init_chart_2_xy()
         self.last_result_dic = {}
         self._game_init()
+        self.new_chart = Chart(self.iter_num, self.player_num)
 
     def _game_init(self):
         for i in range(self.player_num):
@@ -19,6 +26,8 @@ class Game:
     # start game
     def start_game(self):
         for i in range(self.iter_num):
+            self.update_chart_1(iter=i)
+            self.update_chart_2(iter=i)
             print("this is %dth iteration" % i)
             self._print_current_info()
             self._notify_players(self._calc_sum())
@@ -63,3 +72,27 @@ class Game:
             for i in player.strategy.strategy_score_dic:
                 print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
             print("")
+
+    # get head count
+    def get_head_count(self):
+        head_count = 0
+        for player_id, player in enumerate(self.player_list):
+            if player.get_current_result() == 1:
+                head_count = head_count + 1
+        return head_count
+
+    def update_chart_1(self, iter):
+        self.chart_1_x.append(iter + 1)
+        self.chart_1_y.append(self.get_head_count())
+        self.new_chart.update_head_count(x=self.chart_1_x, y=self.chart_1_y)
+
+    def _init_chart_2_xy(self):
+        self.chart_2_x = [[] for i in range(self.player_num)]
+        self.chart_2_y = [[] for i in range(self.player_num)]
+        print(self.chart_2_x)
+
+    def update_chart_2(self, iter):
+        for player_id, player in enumerate(self.player_list):
+            self.chart_2_x[player_id].append(iter + 1)
+            self.chart_2_y[player_id].append(player.capital)
+        self.new_chart.update_capital(x=self.chart_2_x, y=self.chart_2_y)
