@@ -1,8 +1,8 @@
 import matplotlib
-
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+
+matplotlib.use('Agg')
 
 
 class Chart:
@@ -48,7 +48,7 @@ class Chart:
             player_x = x[i]
             player_y = y[i]
             plt.plot(player_x, player_y, label=i)
-            i = i + 1
+            i += 1
 
         plt.xlim(1, self.iter_num)
         plt.ylim(0, self.player_num)
