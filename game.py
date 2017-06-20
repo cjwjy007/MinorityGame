@@ -1,4 +1,3 @@
-from chart import Chart
 from player_factory import PlayerFactory
 
 
@@ -100,12 +99,13 @@ class Game:
                     print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
             print("")
 
-    # get head count
+            # get head count
+
     def get_head_count(self):
         head_count = 0
         for player_id, player in enumerate(self.player_list):
             if player.get_current_result() == 1:
-                head_count += 1
+                head_count = head_count + 1
         return head_count
 
     def update_chart_1(self, iter):

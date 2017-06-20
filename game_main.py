@@ -3,9 +3,9 @@ from PyQt5 import QtWidgets
 from ui1 import Ui_Form
 
 
-class MyWindow(QtWidgets.QWidget):
+class mywindow(QtWidgets.QWidget):
     def __init__(self):
-        super(MyWindow, self).__init__()
+        super(mywindow, self).__init__()
         self.new = Ui_Form()
         self.new.setupUi(self)
 
@@ -17,6 +17,6 @@ if __name__ == '__main__':
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    my_show = MyWindow()
-    my_show.show()
+    myshow = mywindow()
+    myshow.show()
     sys.exit(app.exec_())
