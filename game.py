@@ -1,4 +1,5 @@
 from player_factory import PlayerFactory
+from chart import Chart
 
 
 class Game:
