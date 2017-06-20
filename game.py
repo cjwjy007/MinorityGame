@@ -74,8 +74,8 @@ class Game:
 
     # print information
     def _print_current_info(self):
-    if self.is_human:
-        human = self.player_list[0]
+        if self.is_human:
+            human = self.player_list[0]
             print("player:%d" % 0, end=' ')
             print("memory:%r" % human.memory, end=' ')
             print("player choice:%d" % human.get_current_result())
@@ -88,9 +88,9 @@ class Game:
                 for i in player.strategy.strategy_score_dic:
                     print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
                 print("")
-    else:
-        for player_id, player in enumerate(self.player_list):
-            print("player:%d" % player_id, end=' ')
+        else:
+            for player_id, player in enumerate(self.player_list):
+                print("player:%d" % player_id, end=' ')
                 print("memory:%r" % player.memory, end=' ')
                 print("current strategy:%d" % player.strategy.current_strategy, end=' ')
                 print("player choice:%d" % player.get_current_result())
@@ -99,8 +99,8 @@ class Game:
                     print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
             print("")
 
+            # get head count
 
-    # get head count
     def get_head_count(self):
         head_count = 0
         for player_id, player in enumerate(self.player_list):
