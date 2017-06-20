@@ -1,13 +1,13 @@
 from game import Game
 from PyQt5 import QtWidgets
-from ui1 import Ui_Form
+from ui1 import Ui_Main
 
 
-class mywindow(QtWidgets.QWidget):
+'''class mywindow(QtWidgets.QWidget):
     def __init__(self):
         super(mywindow, self).__init__()
-        self.new = Ui_Form()
-        self.new.setupUi(self)
+        self.new = Ui_Main()
+        self.new.setupUi(self)'''
 
 
 if __name__ == '__main__':
@@ -17,6 +17,6 @@ if __name__ == '__main__':
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    myshow = mywindow()
+    myshow = Ui_Main()
     myshow.show()
     sys.exit(app.exec_())

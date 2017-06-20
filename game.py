@@ -9,7 +9,7 @@ class Game:
             cls.instance = super(Game, cls).__new__(cls)
         return cls.instance
 
-    def __init__(self, player_num=None, memory_num=None, strategy_num=None, iter_num=None, is_human=False):
+    def __init__(self, player_num=None, memory_num=None, strategy_num=None, iter_num=None, is_human=None):
         self.is_human = is_human
         self.iter_num = iter_num
         self.strategy_num = strategy_num
@@ -37,13 +37,13 @@ class Game:
                 self.player_list.append(player_factory.get_player(is_human=False))
 
     # start game
-    def start_game(self):
-        for i in range(self.iter_num):
+    def start_game(self,i=None,j=None):
+        # for i in range(self.iter_num):
             self.update_chart_1(iter=i)
             self.update_chart_2(iter=i)
             print("this is %dth iteration" % i)
             if self.is_human:
-                self.player_list[0].set_current_choice_from_button()
+                self.player_list[0].set_current_choice_from_button(j)
             self._print_current_info()
             self._notify_players(self._calc_sum())
             print("")

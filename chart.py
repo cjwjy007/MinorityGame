@@ -29,8 +29,8 @@ class Chart:
         plt.yticks(np.linspace(0, self.player_num, self.player_num + 1, endpoint=True))
         plt.legend(bbox_to_anchor=[0.3, 1])
         plt.grid()
-        plt.savefig('chart_1.jpg')
-        plt.pause(1)
+        plt.savefig('chart_1.jpg', dpi=60)
+        #plt.pause(1)
 
     def update_capital(self, x=None, y=None):
         if y is None:
@@ -55,5 +55,5 @@ class Chart:
         plt.yticks(np.linspace(0, self.iter_num, self.iter_num + 1, endpoint=True))
         plt.legend(bbox_to_anchor=[0.3, 1])
         plt.grid()
-        plt.savefig('chart_2.jpg')
-        plt.pause(1)
+        plt.savefig('chart_2.jpg', dpi=60)
+        #plt.pause(1)

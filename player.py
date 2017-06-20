@@ -38,8 +38,8 @@ class Human(Player):
     def get_current_result(self):
         return self.current_choice
 
-    def set_current_choice_from_button(self):
-        self.current_choice = int(input('input -1 or 1'))
+    def set_current_choice_from_button(self,j=None):
+        self.current_choice = int(j)
 
 
 class Computer(Player):

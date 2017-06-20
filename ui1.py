@@ -7,10 +7,22 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from game import Game
-
-
-class Ui_Form(object):
+from ui_autogame import UI_AutoGame
+from ui_human import UI_HumanPlayer
+class Ui_Main(QtWidgets.QWidget):
+    def __init__(self, parent = None):
+        super(Ui_Main, self).__init__(parent)
+        self.setupUi(self)
+    def human_player_button_click(self):
+        agent = self.lineEdit_agent.text()
+        agent_num = int(agent)
+        strategies = self.lineEdit_strategies.text()
+        str_num = int(strategies)
+        memory = self.lineEdit_memory.text()
+        memo_len = int(memory)
+        iteration = self.lineEdit_iteration.text()
+        ite_num = int(iteration)
+        self.ui_human=UI_HumanPlayer(player_num=agent_num, memory_num=memo_len, strategy_num=str_num, iter_num=ite_num)
     def autogame_button_click(self):
         agent = self.lineEdit_agent.text()
         agent_num = int(agent)
@@ -20,9 +32,7 @@ class Ui_Form(object):
         memo_len = int(memory)
         iteration = self.lineEdit_iteration.text()
         ite_num = int(iteration)
-        new_game = Game(player_num=agent_num, memory_num=memo_len, strategy_num=str_num, iter_num=ite_num)
-        new_game.start_game()
-        pass
+        self.ui_auto=UI_AutoGame(player_num=agent_num, memory_num=memo_len, strategy_num=str_num, iter_num=ite_num)
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -79,6 +89,8 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         self.autogame.clicked.connect(self.autogame_button_click)
         self.autogame.clicked.connect(Form.close)
+        self.human_player.clicked.connect(self.human_player_button_click)
+        #self.human_player.clicked.connect(Form.close)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
