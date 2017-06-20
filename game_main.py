@@ -15,3 +15,4 @@ if __name__ == '__main__':
     myshow = mywindow()
     myshow.show()
     sys.exit(app.exec_())
+
