@@ -32,9 +32,6 @@ class Human(Player):
         super().__init__(memory_num, strategy_num)
         self.current_choice = 1
 
-    def update_memory(self, cal_sum_flag=None):
-        super().update_memory(cal_sum_flag)
-
     # get strategy result by memory
     def get_current_result(self):
         return self.current_choice
