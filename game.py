@@ -117,7 +117,6 @@ class Game:
     def _init_chart_2_xy(self):
         self.chart_2_x = [[] for i in range(self.player_num)]
         self.chart_2_y = [[] for i in range(self.player_num)]
-        print(self.chart_2_x)
 
     def update_chart_2(self, iter):
         for player_id, player in enumerate(self.player_list):
