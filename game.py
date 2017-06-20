@@ -1,8 +1,15 @@
-from player import Player
+from player_factory import PlayerFactory
 
 
 class Game:
-    def __init__(self, player_num=None, memory_num=None, strategy_num=None, iter_num=None):
+    # singleton
+    def __new__(cls, *args, **kw):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Game, cls).__new__(cls)
+        return cls.instance
+
+    def __init__(self, player_num=None, memory_num=None, strategy_num=None, iter_num=None, is_human=False):
+        self.is_human = is_human
         self.iter_num = iter_num
         self.strategy_num = strategy_num
         self.memory_num = memory_num
@@ -13,13 +20,21 @@ class Game:
         self._game_init()
 
     def _game_init(self):
-        for i in range(self.player_num):
-            self.player_list.append(Player(memory_num=self.memory_num, strategy_num=self.strategy_num))
+        player_factory = PlayerFactory(memory_num=self.memory_num, strategy_num=self.strategy_num)
+        if self.is_human:
+            self.player_list.append(player_factory.get_player(is_human=True))
+            for i in range(self.player_num - 1):
+                self.player_list.append(player_factory.get_player(is_human=False))
+        else:
+            for i in range(self.player_num):
+                self.player_list.append(player_factory.get_player(is_human=False))
 
     # start game
     def start_game(self):
         for i in range(self.iter_num):
             print("this is %dth iteration" % i)
+            if self.is_human:
+                self.player_list[0].set_current_choice_from_button()
             self._print_current_info()
             self._notify_players(self._calc_sum())
             print("")
@@ -33,9 +48,6 @@ class Game:
             diff_sum += val.get_current_result()
         diff_sum_flag = 1 if diff_sum > 0 else -1
         return diff_sum_flag
-        #
-        # for i in range(len(self.last_result_dic)):
-        #     self.last_result_dic[i] = -1 if self.last_result_dic[i] * diff_sum > 0 else 1
 
     # tell player the result
     def _notify_players(self, cal_sum_flag=None):
@@ -54,12 +66,27 @@ class Game:
 
     # print information
     def _print_current_info(self):
-        for player_id, player in enumerate(self.player_list):
-            print("player:%d" % player_id, end=' ')
-            print("memory:%r" % player.memory, end=' ')
-            print("current strategy:%d" % player.strategy.current_strategy, end=' ')
-            print("player choice:%d" % player.get_current_result())
-            print("strategy table info(s_id:score):", end='')
-            for i in player.strategy.strategy_score_dic:
-                print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
-            print("")
+        if self.is_human:
+            human = self.player_list[0]
+            print("player:%d" % 0, end=' ')
+            print("memory:%r" % human.memory, end=' ')
+            print("player choice:%d" % human.get_current_result())
+            for player_id, player in enumerate(self.player_list[1:]):
+                print("player:%d" % (player_id + 1), end=' ')
+                print("memory:%r" % player.memory, end=' ')
+                print("current strategy:%d" % player.strategy.current_strategy, end=' ')
+                print("player choice:%d" % player.get_current_result())
+                print("strategy table info(s_id:score):", end='')
+                for i in player.strategy.strategy_score_dic:
+                    print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
+                print("")
+        else:
+            for player_id, player in enumerate(self.player_list):
+                print("player:%d" % player_id, end=' ')
+                print("memory:%r" % player.memory, end=' ')
+                print("current strategy:%d" % player.strategy.current_strategy, end=' ')
+                print("player choice:%d" % player.get_current_result())
+                print("strategy table info(s_id:score):", end='')
+                for i in player.strategy.strategy_score_dic:
+                    print("%d:%d" % (i, player.strategy.strategy_score_dic[i]), end=' ')
+                print("")
