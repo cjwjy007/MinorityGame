@@ -12,7 +12,11 @@ class Chart:
         self.player_x = []
         self.player_y = []
 
-    def update_head_count(self, x=[], y=[]):
+    def update_head_count(self, x=None, y=None):
+        if y is None:
+            y = []
+        if x is None:
+            x = []
         plt.cla()
         plt.title('Head Count')
         plt.xlabel('Iterator')
@@ -29,7 +33,11 @@ class Chart:
         plt.savefig('chart_1.jpg')
         plt.pause(1)
 
-    def update_capital(self, x=[], y=[]):
+    def update_capital(self, x=None, y=None):
+        if y is None:
+            y = []
+        if x is None:
+            x = []
         plt.cla()
         plt.title('Capital')
         plt.xlabel('Iterator')
