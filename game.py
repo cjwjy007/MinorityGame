@@ -1,3 +1,4 @@
+from chart import Chart
 from player_factory import PlayerFactory
 
 

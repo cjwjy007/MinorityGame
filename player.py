@@ -22,7 +22,7 @@ class Player:
         else:
             self.memory.pop(0)
             self.memory.append(1)
-            self.capital = self.capital + 1
+            self.capital += 1
 
     # get strategy result by memory
     def get_current_result(self):

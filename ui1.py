@@ -8,6 +8,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from game import Game
+
+
 class Ui_Form(object):
     def autogame_button_click(self):
         agent = self.lineEdit_agent.text()
@@ -21,6 +23,7 @@ class Ui_Form(object):
         new_game = Game(player_num=agent_num, memory_num=memo_len, strategy_num=str_num, iter_num=ite_num)
         new_game.start_game()
         pass
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(337, 281)
@@ -87,4 +90,3 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "Number of iterations"))
         self.human_player.setText(_translate("Form", "Human Player"))
         self.autogame.setText(_translate("Form", "AutoGame"))
-

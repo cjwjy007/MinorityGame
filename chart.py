@@ -1,8 +1,8 @@
 import matplotlib
-
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+
+matplotlib.use('Agg')
 
 
 class Chart:
@@ -12,7 +12,11 @@ class Chart:
         self.player_x = []
         self.player_y = []
 
-    def update_head_count(self, x=[], y=[]):
+    def update_head_count(self, x=None, y=None):
+        if y is None:
+            y = []
+        if x is None:
+            x = []
         plt.cla()
         plt.title('Head Count')
         plt.xlabel('Iterator')
@@ -29,7 +33,11 @@ class Chart:
         plt.savefig('chart_1.jpg')
         plt.pause(1)
 
-    def update_capital(self, x=[], y=[]):
+    def update_capital(self, x=None, y=None):
+        if y is None:
+            y = []
+        if x is None:
+            x = []
         plt.cla()
         plt.title('Capital')
         plt.xlabel('Iterator')
@@ -40,7 +48,7 @@ class Chart:
             player_x = x[i]
             player_y = y[i]
             plt.plot(player_x, player_y, label=i)
-            i = i + 1
+            i += 1
 
         plt.xlim(1, self.iter_num)
         plt.ylim(0, self.player_num)
