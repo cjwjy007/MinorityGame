@@ -7,13 +7,11 @@ class Player:
     def __init__(self, memory_num=None, strategy_num=None):
         self.memory_num = memory_num
         self.memory = []
-        self.long_memory = []
         self.capital = 0
         self._init_random_memory()
 
     def _init_random_memory(self):
         self.memory = [random.randint(0, 1) for i in range(self.memory_num)]
-        self.long_memory = self.memory
 
     # update memory and strategy score
     def update_memory(self, cal_sum_flag=None):
@@ -21,11 +19,9 @@ class Player:
         if cal_sum_flag * temp_result == 1:
             self.memory.pop(0)
             self.memory.append(0)
-            self.long_memory.append(0)
         else:
             self.memory.pop(0)
             self.memory.append(1)
-            self.long_memory.append(1)
             self.capital += 1
 
     # get strategy result by memory
