@@ -21,12 +21,14 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(400, 300)
+        Dialog.resize(210, self.strategy_number*40)
         self.tableView = QtWidgets.QTableView(Dialog)
-        self.tableView.setGeometry(QtCore.QRect(0, 0, 400, 300))
+        self.tableView.setGeometry(QtCore.QRect(0, 0, 210, self.strategy_number*40))
         self.tableView.setObjectName("tableView")
+        self.tableView.verticalHeader().setDefaultSectionSize(100)
+        self.tableView.horizontalHeader().setDefaultSectionSize(40)
         self.tableWidget = QtWidgets.QTableWidget(Dialog)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 400, 300))
+        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 210, self.strategy_number*40))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(2)
         self.tableWidget.setRowCount(self.strategy_number)
@@ -34,11 +36,13 @@ class Ui_Dialog(QtWidgets.QDialog):
         for i in range(self.tableWidget.rowCount()):
             cnt = list(self.player_list[int(self.player_number)].strategy.strategy_score_dic.keys())[i]
             newItem = QTableWidgetItem(str(cnt))
+            newItem.setTextAlignment(QtCore.Qt.AlignCenter)
             self.tableWidget.setItem(i, 0, newItem)
         for i in range(self.tableWidget.rowCount()):
             cnt = list(self.player_list[int(self.player_number)].strategy.strategy_score_dic.keys())[i]
             cnt = self.player_list[int(self.player_number)].strategy.strategy_score_dic[cnt]
             newItem = QTableWidgetItem(str(cnt))
+            newItem.setTextAlignment(QtCore.Qt.AlignCenter)
             self.tableWidget.setItem(i, 1, newItem)
 
         self.retranslateUi(Dialog)
@@ -46,4 +50,4 @@ class Ui_Dialog(QtWidgets.QDialog):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Long Memory"))

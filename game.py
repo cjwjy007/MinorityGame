@@ -1,5 +1,5 @@
+from components.chart import Chart
 from player_factory import PlayerFactory
-from chart import Chart
 
 
 class Game:

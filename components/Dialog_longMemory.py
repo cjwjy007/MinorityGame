@@ -6,8 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from TableView import Ui_Dialog
+from PyQt5 import QtCore, QtWidgets
+
+from components.TableView import Ui_Dialog
 
 
 class Ui_Dialog_longMemory(QtWidgets.QDialog):

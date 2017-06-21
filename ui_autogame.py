@@ -1,9 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPixmap
-from Dialog_longMemory import Ui_Dialog_longMemory
-from Dialog_shortMemory import Ui_Dialog_shortMemory
+from PyQt5.QtGui import QPixmap, QColor
 
-
+from components.Dialog_longMemory import Ui_Dialog_longMemory
+from components.Dialog_shortMemory import Ui_Dialog_shortMemory
 from game import Game
 
 
@@ -23,8 +22,9 @@ class UI_AutoGame(QtWidgets.QMainWindow):
 
     def view_long_button_click(self):
         self.viewlong = Ui_Dialog_longMemory(self.new_game.player_list, self.strategy_num)
+
     def view_short_button_click(self):
-        self.viewshort= Ui_Dialog_shortMemory(self.new_game.player_list, self.memory_num)
+        self.viewshort = Ui_Dialog_shortMemory(self.new_game.player_list, self.memory_num)
 
     def continue_button_click(self):
         self.total += 1
@@ -49,9 +49,9 @@ class UI_AutoGame(QtWidgets.QMainWindow):
             self.label[10].setText(temp)
         else:
             self.label[self.total].setText(temp)
-        self.label_img1.setPixmap(QPixmap("chart_1.jpg"))
+        self.label_img1.setPixmap(QPixmap("img/chart_1.jpg"))
         self.label_img1.setAlignment(QtCore.Qt.AlignTop)
-        self.label_img2.setPixmap(QPixmap("chart_2.jpg"))
+        self.label_img2.setPixmap(QPixmap("img/chart_2.jpg"))
         self.label_img2.setAlignment(QtCore.Qt.AlignTop)
 
     def setupUi(self, MainWindow):
@@ -60,7 +60,7 @@ class UI_AutoGame(QtWidgets.QMainWindow):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(5, 5, 1100, self.player_num * 40+35))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(5, 5, 1100, self.player_num * 40 + 35))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -71,16 +71,16 @@ class UI_AutoGame(QtWidgets.QMainWindow):
         temp += 'Bar_State\t'
         self.label.append(QtWidgets.QLabel(temp, self.horizontalLayoutWidget))
         self.label[0].setObjectName("label")
-        self.label[0].setGeometry(QtCore.QRect(15, 15, 70, self.player_num * 40+20))
-        self.label[0].setMaximumSize(QtCore.QSize(70, self.player_num * 40+20))
-        self.label[0].setMinimumSize(QtCore.QSize(70, self.player_num * 40+20))
+        self.label[0].setGeometry(QtCore.QRect(15, 15, 70, self.player_num * 40 + 20))
+        self.label[0].setMaximumSize(QtCore.QSize(70, self.player_num * 40 + 20))
+        self.label[0].setMinimumSize(QtCore.QSize(70, self.player_num * 40 + 20))
         self.horizontalLayout.addWidget(self.label[0], 0, QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
 
         for i in range(10):
             self.label.append(QtWidgets.QLabel(self.horizontalLayoutWidget))
-            self.label[i + 1].setGeometry(QtCore.QRect(15+(i+1) * 70, 30, 70, self.player_num * 40+20))
-            self.label[i + 1].setMaximumSize(QtCore.QSize(70, self.player_num * 40+20))
-            self.label[i + 1].setMinimumSize(QtCore.QSize(70, self.player_num * 40+20))
+            self.label[i + 1].setGeometry(QtCore.QRect(15 + (i + 1) * 70, 30, 70, self.player_num * 40 + 20))
+            self.label[i + 1].setMaximumSize(QtCore.QSize(70, self.player_num * 40 + 20))
+            self.label[i + 1].setMinimumSize(QtCore.QSize(70, self.player_num * 40 + 20))
             self.label[i + 1].setObjectName("label" + str(i))
             self.horizontalLayout.addWidget(self.label[i + 1], 0, QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
 
@@ -106,6 +106,12 @@ class UI_AutoGame(QtWidgets.QMainWindow):
         self.label_img2 = QtWidgets.QLabel(self.centralwidget)
         self.label_img2.setGeometry(QtCore.QRect(525, self.player_num * 40 + 60, 600, 600))
         self.label_img1.setObjectName("label_img2")
+
+        palette1 = QtGui.QPalette()
+        palette1.setColor(self.backgroundRole(), QColor('#FFF5EE'))  # 设置背景颜色
+        # palette1.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap('img/background.jpg')))   # 设置背景图片
+        self.setPalette(palette1)
+        self.setAutoFillBackground(True)
 
         '''self.contin1 = QtWidgets.QPushButton('continue', self.centralwidget)
         self.contin1.setGeometry(QtCore.QRect(20,self.player_num*40+100, 100,30 ))

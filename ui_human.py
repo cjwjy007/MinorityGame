@@ -1,8 +1,11 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPixmap
+from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5.QtGui import QPixmap, QColor
+
+from components.Dialog_longMemory import Ui_Dialog_longMemory
+from components.Dialog_shortMemory import Ui_Dialog_shortMemory
 from game import Game
-from Dialog_longMemory import Ui_Dialog_longMemory
-from Dialog_shortMemory import Ui_Dialog_shortMemory
+
+
 class UI_HumanPlayer(QtWidgets.QMainWindow):
     def __init__(self, player_num=None, memory_num=None, strategy_num=None, iter_num=None, parent=None):
         super(UI_HumanPlayer, self).__init__(parent)
@@ -43,9 +46,9 @@ class UI_HumanPlayer(QtWidgets.QMainWindow):
             self.label[10].setText(temp)
         else:
             self.label[self.total].setText(temp)
-        self.label_img1.setPixmap(QPixmap("chart_1.jpg"))
+        self.label_img1.setPixmap(QPixmap("img/chart_1.jpg"))
         self.label_img1.setAlignment(QtCore.Qt.AlignTop)
-        self.label_img2.setPixmap(QPixmap("chart_2.jpg"))
+        self.label_img2.setPixmap(QPixmap("img/chart_2.jpg"))
         self.label_img2.setAlignment(QtCore.Qt.AlignTop)
 
     def home_button_click(self):
@@ -71,9 +74,9 @@ class UI_HumanPlayer(QtWidgets.QMainWindow):
             self.label[10].setText(temp)
         else:
             self.label[self.total].setText(temp)
-        self.label_img1.setPixmap(QPixmap("chart_1.jpg"))
+        self.label_img1.setPixmap(QPixmap("img/chart_1.jpg"))
         self.label_img1.setAlignment(QtCore.Qt.AlignTop)
-        self.label_img2.setPixmap(QPixmap("chart_2.jpg"))
+        self.label_img2.setPixmap(QPixmap("img/chart_2.jpg"))
         self.label_img2.setAlignment(QtCore.Qt.AlignTop)
 
     def setupUi(self, MainWindow):
@@ -133,6 +136,12 @@ class UI_HumanPlayer(QtWidgets.QMainWindow):
         self.home.setGeometry(QtCore.QRect(130, self.player_num * 40 + 35, 100, 20))
         self.home.setObjectName("home")
         self.home.clicked.connect(self.home_button_click)
+
+        palette1 = QtGui.QPalette()
+        palette1.setColor(self.backgroundRole(), QColor('#FFF5EE'))  # 设置背景颜色
+        # palette1.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap('img/background.jpg')))   # 设置背景图片
+        self.setPalette(palette1)
+        self.setAutoFillBackground(True)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)

@@ -96,7 +96,7 @@ class Ui_Main(QtWidgets.QWidget):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "New Bar"))
-        Form.setWindowIcon(QtGui.QIcon('bar.png'))
+        Form.setWindowIcon(QtGui.QIcon('img/bar.png'))
         self.label.setText(_translate("Form", "Number of agents"))
         self.label_2.setText(_translate("Form", "Number of strategies"))
         self.label_4.setText(_translate("Form", "Length of memory"))
